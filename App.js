@@ -5,17 +5,15 @@ import Info from './Components/Info'
 import Login from './Components/Login';
 
 
-function App() {
-  return (
- <AppNavigator/>
-  );
-}
 
-const AppNavigator = createStackNavigator({
+const App = createStackNavigator({
   
     login: Login,
     info:Info
   
+},
+{
+initialRouteName:'login'
 });
 
-export default createAppContainer(AppNavigator)
+export default createAppContainer(App)

@@ -5,7 +5,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   StyleSheet,
-  Keyboard
+  Keyboard,
+  Alert
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/EvilIcons";
@@ -18,11 +19,8 @@ export default class Login extends Component {
   };
 
   componentDidMount() {
-   this.setState({
-     location:navigator.geolocation
-     
-  }) 
-
+   
+  // Alert.alert(this.props.navigation.push('info'))
   }
 
   changeHandler= (text)=>{
@@ -33,14 +31,14 @@ export default class Login extends Component {
 
   loginHandler=()=>{
     //axios request
-    // this.props.navigation.navigate({'info'})
+
 
     this.setState({
       phoneVal:'',
       passVal:''
     })
 Keyboard.dismiss()
-
+this.props.navigation.navigate('info')
   }
   render() {
     return (
