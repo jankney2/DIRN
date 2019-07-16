@@ -22,6 +22,7 @@ export default class Login extends Component {
      location:navigator.geolocation
      
   }) 
+
   }
 
   changeHandler= (text)=>{
@@ -32,7 +33,7 @@ export default class Login extends Component {
 
   loginHandler=()=>{
     //axios request
-
+    // this.props.navigation.navigate({'info'})
 
     this.setState({
       phoneVal:'',

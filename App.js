@@ -1,20 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import Info from './Components/Info'
 import Login from './Components/Login';
-export default function App() {
-  return (
-    <View style={styles.container}>
 
-      <Login/>
-    </View>
+
+function App() {
+  return (
+ <AppNavigator/>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 210, 255, 1)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const AppNavigator = createStackNavigator({
+  
+    login: Login,
+    info:Info
+  
 });
+
+export default createAppContainer(AppNavigator)
