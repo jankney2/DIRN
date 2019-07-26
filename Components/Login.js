@@ -10,45 +10,50 @@ import {
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/EvilIcons";
+import axios from 'axios'
 
 export default class Login extends Component {
   state = {
-  phoneVal: "",
+    phoneVal: "",
     passVal: "",
-    location:''
   };
 
-  componentDidMount() {
-   
-  // Alert.alert(this.props.navigation.push('info'))
-  }
-
-  changeHandler= (text)=>{
+  changeHandler = text => {
     this.setState({
-      [text.name]:text
-    })
-  }
+      [text.name]: text
+    });
+  };
 
-  loginHandler=()=>{
+  loginHandler = () => {
     //axios request
+    axios.post('/auth/login', {
+      pass:this.state.passVal, 
+      phone: this.state.phoneVal
+    }).then(res=>{
+
+      this.setState({
+        phoneVal: "",
+        passVal: ""
+      });
+      Keyboard.dismiss();
+      this.props.navigation.navigate("homepage");
 
 
-    this.setState({
-      phoneVal:'',
-      passVal:''
+    }).catch(err=>{
+      Alert.alert('Login Error!', err)
     })
-Keyboard.dismiss()
-this.props.navigation.navigate('info')
-  }
+  };
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
         <View style={styles.logincont}>
           <Text style={styles.header}>DropIn</Text>
-          <Text>{this.state.location.geolocation}</Text>
-          
+
+
+
           <TextInput
-          name='phoneVal'
+            name="phoneVal"
             keyboardType="number-pad"
             style={styles.inputs}
             placeholder="Phone"
@@ -61,8 +66,8 @@ this.props.navigation.navigate('info')
           />
 
           <TextInput
-          name='passVal'
-          value={this.state.passVal}
+            name="passVal"
+            value={this.state.passVal}
             style={styles.inputs}
             secureTextEntry={true}
             placeholder="Password"
@@ -94,24 +99,23 @@ const styles = StyleSheet.create({
     padding: 15,
     width: 250,
     margin: 10,
-    borderRadius: 30, 
-    zIndex:2
+    borderRadius: 30,
+    zIndex: 2
   },
-  header:{
-    fontSize:36,
-    textAlign:"center", 
-    marginBottom:50
+  header: {
+    fontSize: 36,
+    textAlign: "center",
+    marginBottom: 50
   },
   logincont: {
-    borderColor:'rgba(200, 210, 255, .5)',
-    borderWidth:2, 
-    paddingTop:100,
-    paddingBottom:100,
-    paddingLeft:30,
-    paddingRight:30,
-
-  }, 
-  buttonStyle:{
-    marginTop:50
+    borderColor: "rgba(200, 210, 255, .5)",
+    borderWidth: 2,
+    paddingTop: 100,
+    paddingBottom: 100,
+    paddingLeft: 30,
+    paddingRight: 30, 
+  },
+  buttonStyle: {
+    marginTop: 50
   }
 });
