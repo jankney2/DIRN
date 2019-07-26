@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, FlatList, Alert } from "react-native";
 import axios from "axios";
 import { ListItem } from "react-native-elements";
+import Property from "./Property";
 
 export default class Properties extends Component {
   state = {
@@ -24,15 +25,20 @@ export default class Properties extends Component {
       <View style={styles.contain}>
         <Text>Properties</Text>
 
-          <FlatList
-            data={this.state.userProperties}
-            renderItem={({ item }) => {
-              return <Text style={{ textAlign: "center" }}>{item.street}</Text>;
-              
-                  
-            }}
-            keyExtractor={item => item.property_id.toString()}
-          />
+        <FlatList
+          data={this.state.userProperties}
+          renderItem={({ item }) => {
+            return (
+              <Property
+                address={`${item.street}, ${item.city}`}
+                tracking={item.is_tracked}
+                
+                style={{ textAlign: "center" }}
+              />
+            );
+          }}
+          keyExtractor={item => item.property_id.toString()}
+        />
       </View>
     );
   }
