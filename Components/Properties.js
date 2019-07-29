@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList, Alert } from "react-native";
+import { View, Text, StyleSheet, ScrollView, FlatList, Alert } from "react-native";
 import axios from "axios";
-import { ListItem } from "react-native-elements";
 import Property from "./Property";
 
 export default class Properties extends Component {
@@ -22,24 +21,26 @@ export default class Properties extends Component {
 
   render() {
     return (
-      <View style={styles.contain}>
+        <ScrollView>
+        <View style={styles.contain}>
         <Text>Properties</Text>
-
+        
         <FlatList
-          data={this.state.userProperties}
-          renderItem={({ item }) => {
-            return (
-              <Property
-                address={`${item.street}, ${item.city}`}
-                tracking={item.is_tracked}
-                
-                style={{ textAlign: "center" }}
-              />
-            );
-          }}
-          keyExtractor={item => item.property_id.toString()}
+        data={this.state.userProperties}
+        renderItem={({ item }) => {
+        return (
+        <Property
+        address={`${item.street}, ${item.city}`}
+        tracking={item.is_tracked}
+        
+        style={{ textAlign: "center" }}
         />
-      </View>
+        );
+        }}
+        keyExtractor={item => item.property_id.toString()}
+        />
+        </View>
+        </ScrollView>
     );
   }
 }

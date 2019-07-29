@@ -26,7 +26,7 @@ export default class Login extends Component {
 
   loginHandler = () => {
     //axios request
-    axios.post('/auth/login', {
+    axios.post('https://dropin.business/auth/login', {
       pass:this.state.passVal, 
       phone: this.state.phoneVal
     }).then(res=>{
@@ -37,7 +37,7 @@ export default class Login extends Component {
       });
       Keyboard.dismiss();
       this.props.navigation.navigate("homepage");
-
+      
 
     }).catch(err=>{
       Alert.alert('Login Error!', err)

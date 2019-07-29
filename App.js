@@ -14,7 +14,7 @@ const App = createStackNavigator({
   
 },
 {
-initialRouteName:'properties'
+initialRouteName:'login'
 });
 
 export default createAppContainer(App)

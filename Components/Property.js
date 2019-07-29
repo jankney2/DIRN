@@ -14,9 +14,7 @@ trackingToggler=()=>{
     })
 }
 
-componentWillUnmount() {
-    axios.put
-}
+
 
     render() {
         return (
