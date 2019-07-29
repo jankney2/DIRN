@@ -23,9 +23,6 @@ export default class HomePage extends Component {
     return (
       <View style={styles.hello}>
         <Text style={styles.header}
-        onPress={()=>{
-          axios.post(`https://dropin.business/api/test/${this.state.user.user_id}`)
-        }}
         
         >Begin location tracking</Text>
         <Text>{`Coords:${this.state.latitude} ${this.state.longitude}`}</Text>
@@ -39,6 +36,11 @@ export default class HomePage extends Component {
                   latitude: position.coords.latitude,
                   longitude: position.coords.longitude
                 });
+
+              axios.post(`https://dropin.business/api/test/${this.state.user.user_id}`, {
+                userLat:this.state.latitude, 
+                userLong:this.state.longitude
+              })
               },
               err => {
                 Alert.alert(err);
