@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView, FlatList, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Alert
+} from "react-native";
 import axios from "axios";
 import Property from "./Property";
 
@@ -15,39 +22,39 @@ export default class Properties extends Component {
         this.setState({
           userProperties: res.data
         });
-
       })
       .catch(err => Alert.alert(err));
   }
 
-  updateUserProperties=()=>{
-    
-
-  }
+  updateUserProperties = () => {};
   render() {
     return (
-        <ScrollView>
+      <ScrollView>
         <View style={styles.contain}>
-        <Text>Properties</Text>
-        
-        <FlatList
-        data={this.state.userProperties}
-        renderItem={({ item }) => {
-        return (
-        <Property
-        updateUserProperties={this.updateUserProperties}
-        address={`${item.street}, ${item.city}`}
-        tracking={item.is_tracked}
-        
-        style={{ textAlign: "center" }}
-        />
-        );
-        }}
-        deleteId={item=>item.property_id}
-        keyExtractor={item => item.property_id.toString()}
-        />
+          <Text>Properties</Text>
+
+          <FlatList
+            data={this.state.userProperties}
+            renderItem={({ item }) => {
+              return (
+                <Property
+                  dataUpdater={(obj) => {
+                    this.setState({
+                      userProperties:obj
+                    })
+                  }}
+                  updateUserProperties={this.updateUserProperties}
+                  address={`${item.street}, ${item.city}`}
+                  tracking={item.is_tracked}
+                  deleteId={item.property_id}
+                  style={{ textAlign: "center" }}
+                />
+              );
+            }}
+            keyExtractor={item => item.property_id.toString()}
+          />
         </View>
-        </ScrollView>
+      </ScrollView>
     );
   }
 }
