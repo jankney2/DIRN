@@ -4,6 +4,7 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
+  SafeAreaView,
   StyleSheet,
   Keyboard,
   Alert
@@ -46,6 +47,7 @@ export default class Login extends Component {
 
   render() {
     return (
+      <SafeAreaView>
       <KeyboardAvoidingView behavior="padding">
         <View style={styles.logincont}>
           <Text style={styles.header}>DropIn</Text>
@@ -76,6 +78,8 @@ export default class Login extends Component {
                 passVal: text
               });
             }}
+
+
           />
 
           <Button
@@ -87,6 +91,7 @@ export default class Login extends Component {
           />
         </View>
       </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 }

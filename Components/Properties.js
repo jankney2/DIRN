@@ -15,10 +15,15 @@ export default class Properties extends Component {
         this.setState({
           userProperties: res.data
         });
+
       })
       .catch(err => Alert.alert(err));
   }
 
+  updateUserProperties=()=>{
+    
+
+  }
   render() {
     return (
         <ScrollView>
@@ -30,6 +35,7 @@ export default class Properties extends Component {
         renderItem={({ item }) => {
         return (
         <Property
+        updateUserProperties={this.updateUserProperties}
         address={`${item.street}, ${item.city}`}
         tracking={item.is_tracked}
         
@@ -37,6 +43,7 @@ export default class Properties extends Component {
         />
         );
         }}
+        deleteId={item=>item.property_id}
         keyExtractor={item => item.property_id.toString()}
         />
         </View>
