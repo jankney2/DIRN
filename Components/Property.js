@@ -12,12 +12,7 @@ trackingToggler=()=>{
     this.setState({
         tracking:!this.state.tracking
     })
-    let trueFalse
-    if(this.state.tracking){
-        trueFalse=true
-    }else{
-        trueFalse=false
-    }
+    let trueFalse=this.state.tracking
 
     Alert.alert(this.state.tracking)
     axios.put(`https://dropin.business/properties/${this.props.deleteId}`, {
@@ -25,7 +20,7 @@ trackingToggler=()=>{
         trackingStatus:trueFalse
     })
     .then((res)=>{
-        Alert.alert(res.data)
+        
       this.props.dataUpdater(res.data)  
     }).catch(err=>Alert.alert(err))
 }
