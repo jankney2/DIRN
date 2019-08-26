@@ -6,7 +6,6 @@ import HomePage from './Components/HomePage'
 import Properties from './Components/Properties';
 import {Provider} from 'react-redux'
 
-const initialState={}
 import {createStore} from 'redux'
 import {mobileReducer} from './redux/reducer'
 const store=createStore(mobileReducer)

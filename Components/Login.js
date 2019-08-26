@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux'
+import {setUser} from '../redux/actionsTypes'
 import {
   View,
   Text,
@@ -13,7 +15,8 @@ import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/EvilIcons";
 import axios from 'axios'
 
-export default class Login extends Component {
+
+ class Login extends Component {
   state = {
     phoneVal: "",
     passVal: "",
@@ -31,7 +34,8 @@ export default class Login extends Component {
       pass:this.state.passVal, 
       phone: this.state.phoneVal
     }).then(res=>{
-
+      this.props.setUser(res.data.user)
+      
       this.setState({
         phoneVal: "",
         passVal: ""
@@ -41,7 +45,7 @@ export default class Login extends Component {
       
 
     }).catch(err=>{
-      Alert.alert('Login Error!', err)
+console.error(err, 'login error')
     })
   };
 
@@ -96,6 +100,8 @@ export default class Login extends Component {
   }
 }
 
+
+
 const styles = StyleSheet.create({
   inputs: {
     fontSize: 24,
@@ -124,3 +130,10 @@ const styles = StyleSheet.create({
     marginTop: 50
   }
 });
+
+const mapDispatchToProps={
+  setUser}
+
+
+
+  export default  connect(null, mapDispatchToProps)(Login)

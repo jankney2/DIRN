@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, Alert } from "react-native";
 import { Button } from "react-native-elements";
 import axios from "axios";
+import {connect} from 'react-redux'
 
-export default class HomePage extends Component {
+
+ class HomePage extends Component {
   state = {
     latitude: "",
     longitude: "",
@@ -11,12 +13,14 @@ export default class HomePage extends Component {
   };
 
   componentDidMount() {
-    axios.get("https://dropin.business/api/userSession").then(res => {
-      this.setState({
-        user: res.data.user
-      });
+    // axios.get("https://dropin.business/api/userSession").then(res => {
+    //   this.setState({
+    //     user: res.data.user
+    //   });
 
-    });
+    // });
+Alert.alert(this.props.activeUser)
+
   }
 
   render() {
@@ -49,12 +53,15 @@ export default class HomePage extends Component {
           }}
         />
 
+
         <Button
           title="view properties"
           onPress={() => {
             this.props.navigation.navigate("properties");
           }}
         />
+
+        <Text>active id{this.props.activeUser.user_id}</Text>
       </View>
     );
   }
@@ -79,3 +86,8 @@ const styles = StyleSheet.create({
     width: 200
   }
 });
+
+const mapStateToProps=state=>{
+  return {activeUser:state.user}
+}
+export default connect(mapStateToProps)(HomePage)
