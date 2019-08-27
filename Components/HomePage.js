@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import axios from "axios";
 import {connect} from 'react-redux'
@@ -9,19 +9,9 @@ import {connect} from 'react-redux'
   state = {
     latitude: "",
     longitude: "",
-    user:{}
+    user:{},
+    counter:0
   };
-
-  componentDidMount() {
-    // axios.get("https://dropin.business/api/userSession").then(res => {
-    //   this.setState({
-    //     user: res.data.user
-    //   });
-
-    // });
-Alert.alert(this.props.activeUser)
-
-  }
 
   render() {
     return (
@@ -41,17 +31,18 @@ Alert.alert(this.props.activeUser)
                   longitude: position.coords.longitude
                 });
 
-              axios.post(`https://dropin.business/api/test/${this.state.user.user_id}`, {
+              axios.post(`https://dropin.business/api/test/${this.props.activeUser.user_id}`, {
                 userLat:this.state.latitude, 
                 userLong:this.state.longitude
               })
               },
               err => {
-                Alert.alert(err);
+                console.log(err);
               }
             );
           }}
         />
+
 
 
         <Button
@@ -61,8 +52,16 @@ Alert.alert(this.props.activeUser)
           }}
         />
 
+        <Button title='timer' onPress={()=>{setInterval(()=>{
+          this.setState({
+            counter:++this.state.counter
+          })
+        },1000)}} />
+
+<Text>{this.state.counter}</Text>
         <Text>active id{this.props.activeUser.user_id}</Text>
       </View>
+      
     );
   }
 }
